@@ -52,10 +52,9 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
 - There are handlebars helper functions available:
 
    - *httpbasicauth* - suppose your context is
-      `{"client" : {"id":"ABC", "secret":"DEF"}}`
-      You can use `{{httpbasicauth client.id client.secret}}` to
-      produce an HTTP Basic Auth header value: the word "Basic " followed by a
-      base64 blob.
+      `{"client" : {"id":"ABC", "secret":"DEF"}}` You can use
+      `{{httpbasicauth client.id client.secret}}` to produce an HTTP Basic
+      Auth header value: the word "Basic " followed by the right base64 blob.
 
    - *random* - `{{random 2 20}}` generates a random number between 2 and 20.
 
@@ -70,7 +69,7 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
         from the array aa using a weighted selector. Each element of the array
         must itself be an array of form `[VALUE, WEIGHT]`. For example, `{{weightedRandomSelect aa}}`
         selects "Mackerel" 10 times for every one time it selects "Sardine" if
-        the array is `[ ["Mackerel", 10], ["Sardine", 1]]`. The value
+        the array is `[["Mackerel", 10], ["Sardine", 1]]`. The value
         returned is the first element of the selected inner 2-element array. One
         application of this is to use a variety of client_ids for calls. Another
         option is to use it to randomly select IP addresses to insert into an
@@ -84,7 +83,7 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
 ## Other Notes
 
 
- - Endpoints specified here NEED NOT support [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+ - Endpoints specified here need not support [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
    This is an electronjs app and is not subject to the same-origin policy enforced by the
    browser.
 
