@@ -1,0 +1,153 @@
+body { margin: 4px 8px; font-size: 140%; }
+
+form div label {
+  float: left;
+  width: 148px;
+  margin: 8px 0;
+}
+/*
+form > div > select,
+form > div > div ul,
+form > div > input {
+  float: left;
+  max-width: 660px;
+  margin: 2px 0;
+}
+*/
+
+/*
+form > div > div.chosen-container-multi > ul.chosen-choices li.search-field {
+  margin: 3px 5px 3px 12px;
+}
+form > div > div.chosen-container-multi > ul.chosen-choices li.search-choice {
+  margin: 6px 5px 5px 1px;
+}
+form > div > div.chosen-container {
+  margin: 2px 0;
+  max-width: 440px;
+}
+
+*/
+
+form > div,
+form > div.form-group {
+  display:block;
+  clear:both;
+  margin-bottom: 2px;
+}
+div.divider {
+  border-top: 1px solid Black;
+}
+#output { 
+  margin-top: 28px;
+  font-size: 160%;
+}
+#output .error { 
+  color: Red;
+}
+#output > div {
+  margin-top: 18px;
+}
+
+
+input[type='url'] {
+  font-size: 120%;
+}
+
+optgroup {
+  font-size: 120%;
+}
+
+/*
+#headers {
+  border: solid 1px LightGrey;
+}
+*/
+
+#headers .one-header {
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.clearfix {
+  width:100%;
+  clear:both;  
+}
+
+.headers .one-header, .extracts .one-extract {
+  width: 100%;
+}
+
+.headers .one-header > input, .extracts .one-extract > input {
+  float: left;
+  margin: 2px 4px;
+}
+
+.headers .one-header > .http-header-name, .extracts .one-extract > .extract-name {
+  width: 34%;
+}
+
+.headers .one-header > .http-header-value, .extracts .one-extract > .extract-jsonpath {
+  width: 58%;
+}
+
+.headers .one-header > input, .headers .one-header > button {
+  display: inline-block;
+  margin-left: 0;
+}
+
+.end-point > input::placeholder,
+.headers .one-header > input::placeholder,
+.extracts .one-extract > input::placeholder,
+.payload textarea::placeholder,
+textarea.txt-initial-context::placeholder {
+  color: #D3D3D3;
+  font-size: 1.0em;
+  font-style: italic;
+}
+
+.payload {
+}
+
+textarea {
+  height: auto;
+  min-width: 100%;
+}
+
+.ui-tabs, .ui-tabs-nav {
+  width:100%;
+}
+
+.batchsize, .speedfactor {
+    margin-top: 12px;
+}
+
+.blank-response {
+  color: #D3D3D3;
+  font-size: 1.0em;
+  font-style: italic;
+  border: solid 1px #D3D3D3;
+  padding: 4px 6px;
+}
+
+#help-message { display: none; }
+
+#config { display: none; }
+
+#main-div {
+  margin: 10px auto;
+  max-width:1280px;
+  background-color: #F1F1F1; 
+  padding: 20px;
+}
+
+.ui-state-default.ui-tab .ui-tabs-anchor {
+  font-size: 65%;
+  font-style: italic;
+  color: #a8afb5;
+}
+
+.term {
+  font-weight: bold;
+}

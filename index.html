@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Load generator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../favicon.ico?v=3" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Insert this line above script imports  -->
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <!-- 
+    <script type='text/javascript' src="js/jquery-1.11.3.js"></script>
+    -->
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type='text/javascript' src='js/jquery-debounce.js'></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type='text/javascript' src='js/CountdownTimer.js'></script>
+    <script type='text/javascript' src='js/s3u-jsonpath.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js'></script>
+    <script type='text/javascript' src='js/handlebars-helpers.js'></script>
+    <script type='text/javascript' src='js/load-generator-page.js'></script>
+  </head>
+
+  <body>
+    <div id='main-div'>
+
+      <h2>Request Generator
+      <button class="btn btn-default btn-outline" id='open-help'>Help</button>
+      <button class="btn btn-default btn-outline" id='open-config'>JSON Configuration</button>
+      </h2>
+      
+      <div id='config' title="JSON Configuration">
+        <textarea class='txt-config' rows='25' style='max-width:90%'></textarea>
+      </div>
+      
+      <div id='help-message' title="Help">
+        <p>This web page will generate a stream of requests against one or more HTTP Endpoints, with parameters that you specify.</p>
+        <p>Basic Usage</p>
+        <ol>
+          <li>Define one or more batches; each batch specifies a series of 1 or more identical GET/POST/PUT requests that will be sent.</li>
+          <li>For each batch, select the verb, the URL, and optionally the headers to send. If the verb is PUT or POST, then you can also specify the request payload.</li>
+          <li>Also adjust the "batch size" if you like - this is the number of identical requests to make in sequence.</li>
+          <li>If you want to send requests of different types, you can click the + tab to add a new batch of requests, with a new verb, url, headers, payload, and batchsize.</li>
+          <li>If you added a batch you don't want, click the X to remove the tab.</li>
+          <li>Select the "speed factor". It goes to 11. This apples to the set of all batches.</li>
+          <li>Batches run in sequence. So if you have two batches, with batchsize 1 and 14 respectively, each run will send one of the first request, and 14 of the second. If the speedfactor is low enough and the response rate is fast enough, the logic will sleep between runs.</li>
+          <li>Hint: use batch 1 to POST to your /token endpoint, then extract the token, and use batch 2 to invoke a number of requests with that token.</li>
+        </ol>
+
+        <p>Templates</p>
+        <ol>
+          <li>You can specify the initial context in JSON format in the Initial Context tab. Make sure it's valid.</li>
+          
+          <li>You can use <a href='http://handlebarsjs.com/expressions.html'>handlebars expressions</a> 
+            to inject things from the context into the URL, payload, or headers. For example
+            suppose your context is {"client_id" : "ABC", "client_secret": "DEF"} .  You
+            can use {{client_id}} in any URL, payload, or header (name or value) to emit
+            the value "ABC".</li>
+          
+          <li>There are handlebars helper functions available:
+            <ul>
+              
+              <li><span class='term'>httpbasicauth</span> - suppose your context is
+                <tt>{"client" : {"id":"ABC", "secret":"DEF"}}</tt> .
+                You can use <tt>{{httpbasicauth client.id client.secret}}</tt> to
+                produce an HTTP Basic Auth header value: the word "Basic " followed by a
+                base64 blob.</li>
+              
+              <li><span class='term'>random</span> - <tt>{{random 2 20}}</tt> generates a random number between 2 and 20.</li>
+              
+              <li><span class='term'>randomItem</span> - <tt>{{randomItem a}}</tt> selects a random item from the array a.</li>
+              
+              <li><span class='term'>randomString</span> - <tt>{{randomString}}</tt> generates
+              a string of length between 12 and 40, consisting of random ASCII
+              alphanumeric characters.<tt>{{randomString 23}}</tt> generates a random
+              string of length 23.</li>
+              
+              <li><span class='term'>weightedRandomSelect</span> - selects a random item
+                from the array aa using a weighted selector. Each element of the array
+                must itself be an array of form<tt>[VALUE, WEIGHT]</tt>. For example,  <tt>{{weightedRandomSelect aa}}</tt>
+                selects "Mackerel" 10 times for every one time it selects "Sardine" if
+                the array is<tt>[ ["Mackerel", 10], ["Sardine", 1]]</tt>. The value
+                returned is the first element of the selected inner 2-element array. One
+                application of this is to use a variety of client_ids for calls. Another
+                option is to use it to randomly select IP addresses to insert into an
+                X-Forwarded-For header.</li>
+              
+            </ul>
+          
+          <li>For each type of request, you can extract values from the response JSON payloads using jsonpath.
+            Use the "Post-Response Extracts" tab to specify that.
+            You can then employ those values via handlebars templates in the url, payload, or headers for subsequent requests.</li>
+
+        </ol>
+        <p>Other Notes</p>
+        <ol>
+          
+          <li>Endpoints specified here must support <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS'>CORS</a>
+            and must <span title='Access-Control-Allow-Origin: *'>allow any origin.</span> If
+            you don't have a CORS-enable endpoint, then all requests will
+            fail. This is due to the same-origin policy enforced by the
+            browser.</li>
+          
+          <li>The behavior of the extraction logic is not defined or
+            tested for responses that contain non-JSON payloads.</li>
+          
+          <li>You can change any of the settings - method, URL, headers, payload,
+            extracts, batchsize, speed, - while the agent is running. But be careful; the agent
+            won't wait for you to get everything formatted correctly in your URL or JSON payload.</li>
+          
+          <li>When you click "Start", this page uses LocalStorage to store your
+            settings. Click the "JSON Configuration" tab to see or modify the
+            configuration in JSON form.  You may wish to ctrl-C copy this JSON and save it
+            locally, or ctrl-V paste in a new configuration.</li>
+          
+          <li>No information is sent to any endpoint, other than the ones you specify explicitly as endpoints.</li>
+          
+        </ol>
+      </div>
+      
+      <form role="form">
+        <div class="form-group">
+          
+          <div id='batchHolder'>
+          </div>
+
+          <div class='speedfactor'>
+            <label for'='speedfactor'>speed factor:</label>
+            <select name="speedfactor" id="speedfactor" class="form-control" style='width:auto;position:relative;float:left;' required title='it goes to 11'></select>
+          </div>
+          <div style='width:100%;clear:both;'></div>
+          <div class="form-group col-sm-1 nopadding" style='position:relative; width:auto; float:left; padding-left: 4px; padding-right: 4px;' >
+            <button class="btn btn-success send-req" id='startstop'>Start</button>
+          </div>
+          <div class="form-group col-sm-1 nopadding" style='position:relative; width:auto;float:left; padding-left: 4px; padding-right: 4px;' >
+            <button class="btn btn-default btn-outline send-req" id='reset'>Reset</button>
+          </div>
+          <div style='width:100%;clear:both;'></div>
+        </div>
+        
+      </form>
+
+      <div id='output'>
+        <div>status: <span id='status'>--</span></div>
+        <div>success: <span id='successcount'>0</span></div>
+        <div>errors: <span id='errorcount'>0</span></div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
