@@ -1,6 +1,12 @@
 # Electronjs load-gen
 
-This app will generate a stream of requests against one or more HTTP Endpoints, with parameters that you specify.
+This app will generate a stream of requests against one or more HTTP Endpoints, with parameters that you specify. This app works like [this web app](https://dinochiesa.github.io/load-generator/). The differences:
+
+             |  Web app          | Electronjs App         |
+-------------|-------------------|------------------------|
+installation | none              | git clone; npm install |
+Endpoints    | must support CORS | any endpoint           |
+
 
 ![screenshot](images/screenshot-20180206-105319.png)
 
