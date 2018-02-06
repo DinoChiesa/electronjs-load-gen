@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="../favicon.ico?v=3" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!-- Insert this line above script imports  -->
-<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <!-- 
-    <script type='text/javascript' src="js/jquery-1.11.3.js"></script>
-    -->
+    <!-- to allow scripts to load properly in electronjs  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type='text/javascript' src='js/jquery-debounce.js'></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -65,7 +62,7 @@
               <li><span class='term'>httpbasicauth</span> - suppose your context is
                 <tt>{"client" : {"id":"ABC", "secret":"DEF"}}</tt> .
                 You can use <tt>{{httpbasicauth client.id client.secret}}</tt> to
-                produce an HTTP Basic Auth header value: the word "Basic " followed by a
+                produce an HTTP Basic Auth header value: the word "Basic " followed by the right
                 base64 blob.</li>
               
               <li><span class='term'>random</span> - <tt>{{random 2 20}}</tt> generates a random number between 2 and 20.</li>
@@ -74,14 +71,14 @@
               
               <li><span class='term'>randomString</span> - <tt>{{randomString}}</tt> generates
               a string of length between 12 and 40, consisting of random ASCII
-              alphanumeric characters.<tt>{{randomString 23}}</tt> generates a random
+              alphanumeric characters. <tt>{{randomString 23}}</tt> generates a random
               string of length 23.</li>
               
               <li><span class='term'>weightedRandomSelect</span> - selects a random item
                 from the array aa using a weighted selector. Each element of the array
                 must itself be an array of form<tt>[VALUE, WEIGHT]</tt>. For example,  <tt>{{weightedRandomSelect aa}}</tt>
                 selects "Mackerel" 10 times for every one time it selects "Sardine" if
-                the array is<tt>[ ["Mackerel", 10], ["Sardine", 1]]</tt>. The value
+                the array is <tt>[["Mackerel", 10], ["Sardine", 1]]</tt>. The value
                 returned is the first element of the selected inner 2-element array. One
                 application of this is to use a variety of client_ids for calls. Another
                 option is to use it to randomly select IP addresses to insert into an
@@ -97,10 +94,8 @@
         <p>Other Notes</p>
         <ol>
           
-          <li>Endpoints specified here must support <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS'>CORS</a>
-            and must <span title='Access-Control-Allow-Origin: *'>allow any origin.</span> If
-            you don't have a CORS-enable endpoint, then all requests will
-            fail. This is due to the same-origin policy enforced by the
+          <li>Endpoints specified need not support <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS'>CORS</a>. 
+            The electron app is not subject to the same-origin policy enforced by the
             browser.</li>
           
           <li>The behavior of the extraction logic is not defined or
