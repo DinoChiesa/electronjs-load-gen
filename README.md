@@ -8,7 +8,7 @@ This app will generate a stream of requests against one or more HTTP Endpoints, 
 |Endpoints    | must support CORS | any endpoint           |
 
 
-![screenshot](images/screenshot-20180206-105319.png)
+![screenshot](assets/images/screenshot-20180206-105319.png)
 
 ## To Run
 

@@ -3,7 +3,7 @@
 
 (function (){
   'use strict';
-  const maxBatchSize = 20,
+  const maxBatchSize = 50,
         defaultBatchSize = 1,
         maxSpeedFactor = 11,
         defaultSpeedFactor = 5,
@@ -537,7 +537,7 @@
   function retrieveTemplates() {
     return jQuery.when.apply(jQuery,
                              jQuery.map(arguments, function(url) {
-                               return $.ajax({ url : "tmpl/" + url, dataType: "text" }); // a promise
+                               return $.ajax({ url : "assets/tmpl/" + url, dataType: "text" }); // a promise
                              }))
       .then(function(){
         var def = jQuery.Deferred();
