@@ -9,6 +9,15 @@ npm install
 npm start
 ```
 
+## License
+
+This material is copyright 2018 Google Inc.
+and is licensed under the [Apache 2.0 License](LICENSE).
+
+## Disclaimer
+
+This example is not an official Google product, nor is it part of an official Google product.
+
 
 ## Basic Usage
 
@@ -66,7 +75,6 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
         application of this is to use a variety of client_ids for calls. Another
         option is to use it to randomly select IP addresses to insert into an
         X-Forwarded-For header.
-
 
 - For each type of request, you can extract values from the response JSON payloads using jsonpath.
   Use the "Post-Response Extracts" tab to specify that.
