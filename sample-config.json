@@ -1,0 +1,42 @@
+{
+  "requests": [
+    {
+      "http-end-point": "https://myorg-test.apigee.net/oauth2-cc/token",
+      "method": "post",
+      "txt-payload": "grant_type=client_credentials&foo={{randomString 20}}&fish={{weightedRandomSelect fish}}",
+      "headers": {
+        "Authorization": "{{httpbasicauth client.id client.secret}}"
+      },
+      "extracts": {
+        "token": "$.access_token"
+      },
+      "batchsize-select": 1
+    },
+    {
+      "http-end-point": "https://myorg-test.apigee.net/verify-token/t1",
+      "method": "get",
+      "txt-payload": "",
+      "headers": {
+        "Authorization": "Bearer {{token}}"
+      },
+      "extracts": {},
+      "batchsize-select": 12
+    }
+  ],
+  "initialContext": {
+    "client": {
+      "id": "C41mp0hIDm6y2gXitUvbpdAkz55XvG7m",
+      "secret": "NqqBZdPZroIRmcg3"
+    },
+    "fish": [
+      ["Shark",3],
+      ["Shrimp",50],
+      ["Sardine",10],
+      ["Herring",20],
+      ["Anchovies",10],
+      ["Mackerel",50],
+      ["Tuna",8]
+    ]
+  },
+  "speedfactor": 5
+}
