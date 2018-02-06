@@ -2,7 +2,11 @@
 
 This app will generate a stream of requests against one or more HTTP Endpoints, with parameters that you specify.
 
+![screenshot](images/screenshot-20180206-105319.png)
+
 ## To Run
+
+You need to first clone the repo to your own local machine. Then:
 
 ```
 npm install
