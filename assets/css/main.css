@@ -151,3 +151,9 @@ textarea {
 .term {
   font-weight: bold;
 }
+
+/* https://github.com/electron/electron/issues/4420#issuecomment-242835469 */
+::selection {
+  background:#93b7f2;
+  color: #032764;
+}
