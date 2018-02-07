@@ -102,8 +102,6 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
   Use the "Post-Response Extracts" tab to specify that.
   You can then employ those values via handlebars templates in the url, payload, or headers for subsequent requests.
 
-- You can copy/paste configuration for using the "JSON Configuration" button. Here is a [sample config file](./assets/sample-config.json)
-
 ## Other Notes
 
  - Endpoints specified here need not support [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
@@ -114,13 +112,16 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
    tested for responses that contain non-JSON payloads.</li>
 
  - You can change any of the settings - method, URL, headers, payload,
-   extracts, batchsize, speed, - while the agent is running. But be careful; the agent
+   extracts, batchsize, speed - in the UI while the agent is running. But be careful; the agent
    won't wait for you to get everything formatted correctly in your URL or JSON payload.
 
  - When you click "Start", this page uses LocalStorage to store your
-   settings. Click the "JSON Configuration" tab to see or modify the
+   settings.
+
+ - Click the "JSON Configuration" tab to see or modify the
    configuration in JSON form. You may wish to ctrl-C copy this JSON and save it
-   locally, or ctrl-V paste in a new configuration.
+   locally, or ctrl-V paste in a new configuration. Here is a [sample config file](./assets/sample-config.json)
+
 
  - No information is sent to any endpoint, other than the ones you specify explicitly as endpoints.
 
