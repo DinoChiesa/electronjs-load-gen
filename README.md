@@ -102,9 +102,9 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
   Use the "Post-Response Extracts" tab to specify that.
   You can then employ those values via handlebars templates in the url, payload, or headers for subsequent requests.
 
+- You can copy/paste configuration for using the "JSON Configuration" button. Here is a [sample config file](./assets/sample-config.json)
 
 ## Other Notes
-
 
  - Endpoints specified here need not support [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
    This is an electronjs app and is not subject to the same-origin policy enforced by the
