@@ -18,9 +18,8 @@ This app will generate a stream of requests against one or more HTTP Endpoints, 
 
 | File                                 | SHA256 hash  |
 |--------------------------------------|--------------|
-|electron-load-generator-0.9.2.dmg     | 0ece5f22084309bbf9fb609cc3d87f8190c6bd4ff5afbd39784baffd70dea8e6 |
+|electron-load-generator-0.9.2.dmg     | 0ECE5F22084309BBF9FB609CC3D87F8190C6BD4FF5AFBD39784BAFFD70DEA8E6 |
 |LoadGeneratorAppInstaller-0.9.2.exe   | ED050487C787B0C6CCA40D73B751D4B8A988AA4BBD98DFB82FAECF5E662BA43E |
-
 
 
 ## To Run from the Repo
