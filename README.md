@@ -12,13 +12,14 @@ This app will generate a stream of requests against one or more HTTP Endpoints, 
 
 ## To install
 
-- For MacOS, download and install the file [electron-load-generator.dmg](./installers/electron-load-generator.dmg).
-- For Windows, (sorry, I haven't figured out how to build an installer for Windows. You can clone from the repo and run that way. See below)
+- For MacOS, download and install the file [electron-load-generator.dmg](./installers/macos/electron-load-generator.dmg).
+- For Windows, download and install the file [ElectronLoadGeneratorAppInstaller.exe](./installers/windows/ElectronLoadGeneratorAppInstaller.exe).
 
 
-| File                       | SHA256 hash  |
-|----------------------------|--------------|
-|electron-load-generator.dmg | 91e61f9347dd1c0222a273d9a75a541bbca0c2b42f08f431d21fc17b51947ede |
+| File                                 | SHA256 hash  |
+|--------------------------------------|--------------|
+|electron-load-generator.dmg           | 91e61f9347dd1c0222a273d9a75a541bbca0c2b42f08f431d21fc17b51947ede |
+|ElectronLoadGeneratorAppInstaller.exe | 2118b7191a88b5e30cb762c3bbc9786098a97ff7ed07c03c6244dc34b817d71d |
 
 
 
