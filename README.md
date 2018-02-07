@@ -12,14 +12,14 @@ This app will generate a stream of requests against one or more HTTP Endpoints, 
 
 ## MacOS and Windows installers
 
-- MacOS: [electron-load-generator.dmg](./installers/macos/electron-load-generator.dmg)
-- Windows: [ElectronLoadGeneratorAppInstaller.exe](./installers/windows/ElectronLoadGeneratorAppInstaller.exe)
+- [MacOS](./installers/macos/electron-load-generator-0.9.2.dmg)
+- [Windows](./installers/windows/LoadGeneratorAppInstaller-0.9.2.exe)
 
 
 | File                                 | SHA256 hash  |
 |--------------------------------------|--------------|
-|electron-load-generator.dmg           | 91e61f9347dd1c0222a273d9a75a541bbca0c2b42f08f431d21fc17b51947ede |
-|ElectronLoadGeneratorAppInstaller.exe | 2118b7191a88b5e30cb762c3bbc9786098a97ff7ed07c03c6244dc34b817d71d |
+|electron-load-generator-0.9.2.dmg     | 0ece5f22084309bbf9fb609cc3d87f8190c6bd4ff5afbd39784baffd70dea8e6 |
+|LoadGeneratorAppInstaller-0.9.2.exe   | ED050487C787B0C6CCA40D73B751D4B8A988AA4BBD98DFB82FAECF5E662BA43E |
 
 
 
