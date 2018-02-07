@@ -39,7 +39,7 @@ and is licensed under the [Apache 2.0 License](LICENSE).
 
 ## Disclaimer
 
-This example is not an official Google product, nor is it part of an official Google product.
+This tool is not an official Google product, nor is it part of an official Google product.
 
 
 ## Basic Usage
