@@ -2,18 +2,18 @@
 
 This app will generate a stream of requests against one or more HTTP Endpoints, with parameters that you specify. This app works like [this web app](https://dinochiesa.github.io/load-generator/). The differences:
 
-|             |  Web app          | Electronjs App         |
-|-------------|-------------------|------------------------|
-|installation | none              | git clone; npm install |
-|Endpoints    | must support CORS | any endpoint           |
+|                |  Web app          | Electronjs App         |
+|----------------|-------------------|------------------------|
+| installation   | none              | OS-native installer    |
+| API endpoints  | must support CORS | any endpoint           |
 
 
 ![screenshot](assets/images/screenshot-20180206-105319.png)
 
-## To install
+## MacOS and Windows installers
 
-- For MacOS, download and install the file [electron-load-generator.dmg](./installers/macos/electron-load-generator.dmg).
-- For Windows, download and install the file [ElectronLoadGeneratorAppInstaller.exe](./installers/windows/ElectronLoadGeneratorAppInstaller.exe).
+- MacOS: [electron-load-generator.dmg](./installers/macos/electron-load-generator.dmg).
+- Windows: [ElectronLoadGeneratorAppInstaller.exe](./installers/windows/ElectronLoadGeneratorAppInstaller.exe).
 
 
 | File                                 | SHA256 hash  |
