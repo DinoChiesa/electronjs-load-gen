@@ -76,7 +76,7 @@ Hint: use batch 1 to POST to your /token endpoint, then extract the token, and u
    - *httpbasicauth* - suppose your context is
       `{"client" : {"id":"ABC", "secret":"DEF"}}` You can use
       `{{httpbasicauth client.id client.secret}}` to produce an HTTP Basic
-      Auth header value: the word "Basic " followed by the right base64 blob.
+      Auth header value: the word "Basic " followed by the appropriate base64 blob.
 
    - *random* - `{{random 2 20}}` generates a random number between 2 and 20.
 
