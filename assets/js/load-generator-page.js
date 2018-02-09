@@ -231,7 +231,6 @@
               // https://github.com/s3u/JSONPath
               var result = JSONPath({json: payload, path: jsonpath});
               context[name] =  (Array.isArray(result) && result.length == 1) ? result[0]: result;
-              //console.log('context[%s] = %s', name, context[name]);
             }
           });
           resolve({});
@@ -290,7 +289,6 @@
             .onTick(sleepTick)
             .onExpired(invokeSequence)
             .start();
-          console.log(sleepTimer);
         }
       });
   }
@@ -557,7 +555,6 @@
       .then(function(){
         var def = jQuery.Deferred();
         return def.resolve.apply(def, jQuery.map(arguments, function(response){
-          //console.log(response[1]);
           return response[0];
         }));
       });
