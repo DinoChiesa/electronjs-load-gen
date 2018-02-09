@@ -39,16 +39,27 @@ div.divider {
   border-top: 1px solid Black;
 }
 #output { 
-  margin-top: 28px;
+  margin-top: 0;
   font-size: 160%;
+  border: 1px solid #F1F1F1;
 }
 #output .error { 
   color: Red;
 }
 #output > div {
-  margin-top: 18px;
+  margin-top: 0px;
+  width:100%;
+  clear:both;
+  margin-bottom: 22px  
+}
+#output .output-label {
+  width: 162px;
+  float:left;
 }
 
+#output .output-label + div {
+  float:left;
+}
 
 input[type='url'] {
   font-size: 120%;

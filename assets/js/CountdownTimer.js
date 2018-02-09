@@ -2,7 +2,7 @@
 // ------------------------------------------------------------------
 //
 // created: Mon Jan 22 14:39:37 2018
-// last saved: <2018-January-22 15:06:51>
+// last saved: <2018-February-09 11:16:57>
 
 'use strict';
 
@@ -19,13 +19,13 @@ CountdownTimer.prototype.stop = function() {
   if (this.running || this.timeoutId) {
     if (this.timeoutId) { clearTimeout(this.timeoutId); }
     this.running = false;
-    return;
   }
+  return this;
 };
 
 CountdownTimer.prototype.start = function() {
   if (this.running) {
-    return;
+    return this;
   }
   this.running = true;
   var start = Date.now(),
@@ -45,11 +45,12 @@ CountdownTimer.prototype.start = function() {
         fn.call(this, diffMs);
       }, that);
     }
-    
+
     that.tickFns.forEach(function(fn) {
       fn.call(this, diffMs);
     }, that);
   }());
+  return this;
 };
 
 CountdownTimer.prototype.onTick = function(fn) {
@@ -66,6 +67,6 @@ CountdownTimer.prototype.onExpired = function(fn) {
   return this;
 };
 
-CountdownTimer.prototype.expired = function() {
+CountdownTimer.prototype.isExpired = function() {
   return !this.running;
 };

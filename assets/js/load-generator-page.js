@@ -15,6 +15,7 @@
   var sleepTimer;
   var requestIndex = 0;
   var counts = [0, 0];
+  var startTime = 0;
   var batchdata = {};
   var html5AppId = "67B53CD3-AD0A-4D58-8DE7-997EBC7B3ED1";   // for localstorage
   var templates = Array.apply(null, Array(4)).map((x, i) => '');
@@ -65,6 +66,9 @@
         var state = $('#startstop').attr('data_state');
         if (state !== 'stopped') {
           $('#successcount').html(counts[0]);
+          var now = new Date();
+          var tps = counts[0] / ((now - startTime) / 1000);
+          $('#net_tps').html(tps.toFixed(2));
         }
       });
 
@@ -117,7 +121,7 @@
     };
   }
 
-  function getRunsPerHour(currentHour) {
+  function getTargetRunsPerHour(currentHour) {
     var invocationsPerHour = [
           94, 87, 89, 83, 90, 89, 89, 103,
           105, 112, 103, 109, 121, 122, 100, 98,
@@ -131,7 +135,7 @@
   function getSleepTimeInMs(startOfMostRecentRequest) {
     var now = new Date(),
         currentHour = now.getHours(),
-        runsPerHour = getRunsPerHour(currentHour),
+        runsPerHour = getTargetRunsPerHour(currentHour),
         durationOfLastRun = now - startOfMostRecentRequest,
         sleepTimeInMs = (oneHourInMs / runsPerHour) - durationOfLastRun;
     if (sleepTimeInMs < minSleepTimeInMs) { sleepTimeInMs = minSleepTimeInMs; }
@@ -169,6 +173,9 @@
     var val = Math.floor(millisecondsRemaining / 1000) ;
     if (val > 0) {
       $('#status').html('wake in ' + val + 's');
+      var now = new Date();
+      var tps = counts[0] / ((now - startTime) / 1000);
+      $('#net_tps').html(tps.toFixed(2));
     }
   }
 
@@ -245,10 +252,11 @@
   }
 
   function invokeSequence() {
-    var startTime = new Date();
+    var sequenceStartTime = new Date();
     var $batchHolder = $('#batchHolder');
     var $requests = $batchHolder.find('div.one-request');
     var nRequests = $requests.length;
+    var startingCount = counts[0];
     context = getContext();
     var p = new Promise(function(resolve, reject) {
           if (nRequests) {
@@ -274,11 +282,15 @@
 
     p = p
       .then(function(resultValues) {
+        var now = new Date();
+        var tps = (counts[0] - startingCount) / ((now - sequenceStartTime) / 1000);
+        $('#sequence_tps').html(tps.toFixed(2));
         if (runState == 1) {
-          sleepTimer = new CountdownTimer(getSleepTimeInMs(startTime))
+          sleepTimer = new CountdownTimer(getSleepTimeInMs(sequenceStartTime))
             .onTick(sleepTick)
             .onExpired(invokeSequence)
             .start();
+          console.log(sleepTimer);
         }
       });
   }
@@ -304,6 +316,9 @@
       runState = 1;
       $('#status').html('running...');
       $ss.attr('data_state', 'running');
+      startTime = new Date();
+    counts = [0, 0]; 
+    ['#successcount','#errorcount','#net_tps','#sequence_tps'].forEach( q => { $(q).html('0'); });
       setTimeout(invokeSequence, 2);
       $r.attr("disabled", "disabled");
       $ss.html('Stop');
@@ -318,7 +333,7 @@
     var $ss = $('#startstop');
     var state = $ss.attr('data_state');
     if (state === 'stopped') {
-      ['#successcount','#errorcount'].forEach( q => { $(q).html('0'); });
+      ['#successcount','#errorcount','#net_tps','#sequence_tps'].forEach( q => { $(q).html('0'); });
       counts = [0, 0];
     }
     var $batchHolder = $('#batchHolder');
@@ -572,10 +587,10 @@
     value = window.localStorage.getItem( html5AppId + '.initialcontext' );
     var obj = { name1: "value1" };
     if (value && value !== '') {
-    try {
-      obj = JSON.parse(value);
-    }
-    catch (e) { }
+      try {
+        obj = JSON.parse(value);
+      }
+      catch (e) { }
     }
     $('textarea.txt-initial-context').val(jsonStringifyCompactly(obj));
   }
@@ -644,7 +659,7 @@
 
   $(document).ready(function() {
     retrieveTemplates( 'oneRequest.hbr', 'oneHeader.hbr', 'oneExtract.hbr', 'blankResponse.hbr', 'batchHolder.hbr' )
-      .done(function( /* va_args */) {
+      .done(function( /* va_args */ ) {
         templates = Array.from(arguments).map(tmpl => Handlebars.compile(tmpl));
         var $batchHolder = $( "#batchHolder" );
         $batchHolder.html(templates[4]({}))
