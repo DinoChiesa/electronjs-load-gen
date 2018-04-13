@@ -117,7 +117,13 @@
     return function (data, textStatus, jqXHR) {
       counts[0]++;
       updateOutput(divid, jqXHR, 'success');
-      resolve(JSON.parse(jqXHR.responseText));
+      var r = {};
+      try {
+        r = JSON.parse(jqXHR.responseText);
+      }
+      catch (swallowedExc1) {
+      }
+      resolve(r);
     };
   }
 
@@ -315,7 +321,7 @@
       $('#status').html('running...');
       $ss.attr('data_state', 'running');
       startTime = new Date();
-    counts = [0, 0]; 
+    counts = [0, 0];
     ['#successcount','#errorcount','#net_tps','#sequence_tps'].forEach( q => { $(q).html('0'); });
       setTimeout(invokeSequence, 2);
       $r.attr("disabled", "disabled");
