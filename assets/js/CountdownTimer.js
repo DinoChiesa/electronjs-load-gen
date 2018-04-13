@@ -2,7 +2,7 @@
 // ------------------------------------------------------------------
 //
 // created: Mon Jan 22 14:39:37 2018
-// last saved: <2018-February-09 11:16:57>
+// last saved: <2018-February-13 10:04:51>
 
 'use strict';
 
@@ -37,6 +37,9 @@ CountdownTimer.prototype.start = function() {
 
     if (diffMs > 0) {
       that.timeoutId = setTimeout(internalTick, Math.min(diffMs, that.granularity));
+      that.tickFns.forEach(function(fn) {
+        fn.call(this, diffMs);
+      }, that);
     }
     else {
       diffMs = 0;
@@ -45,10 +48,6 @@ CountdownTimer.prototype.start = function() {
         fn.call(this, diffMs);
       }, that);
     }
-
-    that.tickFns.forEach(function(fn) {
-      fn.call(this, diffMs);
-    }, that);
   }());
   return this;
 };
